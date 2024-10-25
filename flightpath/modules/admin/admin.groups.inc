@@ -601,7 +601,7 @@ function admin_edit_group_form() {
 
   if ($draft_setting_current_catalog_year < $de_catalog_year) {
     
-    fp_add_message(t("<b>Warning:</b> The Draft catalog year is set to %dy, which is less than the catalog year
+    fp_add_message(t("<b>Warning:</b> The \"Current DRAFT catalog year\" advising setting is set to %dy, which is less than the catalog year
                     you are editing. This might cause issues with loading course 
                     names and data correctly.", array("%dy" => $draft_setting_current_catalog_year)), "warning");
     $draft_setting_current_catalog_year = "<b>" . $draft_setting_current_catalog_year . "</b>"; 
@@ -615,7 +615,7 @@ function admin_edit_group_form() {
           adv: group_id = $group_id.
           Used by:
           <a href='javascript: adminPopupWindow(\"" . fp_url("admin/groups/popup-show-group-use", "group_id=$group_id")  . "\");'>[degrees]</a>.
-           Draft advising catalog year setting: $draft_setting_current_catalog_year.
+           Current draft catalog year advising setting: $draft_setting_current_catalog_year.
           </span>",
       "weight" => 0,
     );

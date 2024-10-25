@@ -1105,7 +1105,7 @@ function admin_edit_degree_form($degree_id, $de_catalog_year) {
 
   if ($draft_setting_current_catalog_year < $de_catalog_year) {
     
-    fp_add_message(t("<b>Warning:</b> The Draft catalog year is set to %dy, which is less than the catalog year
+    fp_add_message(t("<b>Warning:</b> The \"Current DRAFT catalog year\" advising setting is set to %dy, which is less than the catalog year
                     you are editing. This might cause issues with loading course 
                     names and data correctly.", array("%dy" => $draft_setting_current_catalog_year)), "warning");
     $draft_setting_current_catalog_year = "<b>" . $draft_setting_current_catalog_year . "</b>"; 
@@ -1114,7 +1114,7 @@ function admin_edit_degree_form($degree_id, $de_catalog_year) {
   if (user_has_permission("can_view_advanced")) {
     $form["markup_adv"] = array(
       "value" => "<span class='tenpt deg-advanced-msg' style='background-color: lemonchiffon; margin-left: 20px; padding: 8px;'>
-          Advanced: degree_id = $degree_id. catalog_year: $de_catalog_year. Draft advising catalog year setting: $draft_setting_current_catalog_year.
+          Advanced: degree_id = $degree_id. catalog_year: $de_catalog_year. Current draft catalog year advising setting: $draft_setting_current_catalog_year.
           </span>",
     ); 
   }
