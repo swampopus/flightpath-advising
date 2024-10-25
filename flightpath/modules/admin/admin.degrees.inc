@@ -1086,12 +1086,12 @@ function admin_edit_degree_form($degree_id, $de_catalog_year) {
   
   $degree = new DegreePlan($degree_id, null, false, false, true);
   $degree->load_descriptive_data();  
-  
+  $school_id = $degree->school_id;
   $major_code = $degree->major_code;
     
   fp_set_title(t("Edit Degree") . " $major_code - $de_catalog_year");
 
-
+ 
   // Add in our CSS and JS
   fp_add_js(fp_get_module_path("admin") . "/js/admin.js");
   fp_add_css(fp_get_module_path("admin") . "/css/admin.css");
@@ -1101,12 +1101,20 @@ function admin_edit_degree_form($degree_id, $de_catalog_year) {
   $db = get_global_database_handler();
 
   
-  
+  $draft_setting_current_catalog_year = variable_get_for_school("current_draft_catalog_year", 2006, $school_id);
 
+  if ($draft_setting_current_catalog_year < $de_catalog_year) {
+    
+    fp_add_message(t("<b>Warning:</b> The Draft catalog year is set to %dy, which is less than the catalog year
+                    you are editing. This might cause issues with loading course 
+                    names and data correctly.", array("%dy" => $draft_setting_current_catalog_year)), "warning");
+    $draft_setting_current_catalog_year = "<b>" . $draft_setting_current_catalog_year . "</b>"; 
+  }
+  
   if (user_has_permission("can_view_advanced")) {
     $form["markup_adv"] = array(
-      "value" => "<span class='tenpt deg-advanced-msg' style='background-color: yellow; margin-left: 20px;'>
-          Advanced: degree_id = $degree_id. catalog_year: $de_catalog_year
+      "value" => "<span class='tenpt deg-advanced-msg' style='background-color: lemonchiffon; margin-left: 20px; padding: 8px;'>
+          Advanced: degree_id = $degree_id. catalog_year: $de_catalog_year. Draft advising catalog year setting: $draft_setting_current_catalog_year.
           </span>",
     ); 
   }
@@ -1386,7 +1394,7 @@ function admin_edit_degree_form($degree_id, $de_catalog_year) {
     $semester->list_courses->reset_counter();
     while($semester->list_courses->has_more()) {
       $course = $semester->list_courses->get_next();
-      $course->load_descriptive_data();
+      $course->load_descriptive_data(); 
       $contents .= "$course->subject_id $course->course_num $course->requirement_type";
       if ($course->min_grade != variable_get_for_school("minimum_passing_grade", "D", $degree->school_id) && $course->min_grade != "") {
         $contents .= " ($course->min_grade)";
@@ -2183,6 +2191,7 @@ function admin_edit_degree_form_submit($form, $form_state) {
         $requirement_type = "m";
       }
 
+      
       // If this course is in our ignore list, override it's type
       // to be 'x'
       if (in_array("$subject_id $course_num", $ignore_courses)) {
@@ -2206,7 +2215,7 @@ function admin_edit_degree_form_submit($form, $form_state) {
       // Okay, we now have enough information to insert the course.
       // Find out what the course_id is.
       if ($course_id = $db->get_course_id($subject_id, $course_num, "", TRUE, $school_id, TRUE)) 
-      {
+      {        
         $query = "INSERT INTO draft_degree_requirements
                     (degree_id, semester_num, course_id, course_min_grade, course_requirement_type, data_entry_value)
                     values (?,?,?,?,?,?) ";

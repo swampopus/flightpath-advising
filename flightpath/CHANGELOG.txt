@@ -2,6 +2,13 @@ FlightPath 7.x Changelog
 ========================
 
 
+2024-10-25
+  Added an extra warning when editing degrees or groups if the draft catalog year setting is LESS than the year you are editing, as that
+  can cause problems loading course names.
+  
+  Added to default style for a "warning" message via fp_add_message("text", "warning")
+  
+
 2024-10-16
   Tidying up code relating to querying for course_id.
 

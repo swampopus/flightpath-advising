@@ -1934,6 +1934,7 @@ function csv_multiline_to_array($csv_str, $bool_first_row_is_headers = TRUE) {
  *          This is the string message itself.
  * @param String $type
  *          The "type" of message.  This string is added as a CSS class to the message, for theming later.
+ *          Examples: "status", "warning", "error"
  * @param boolean $bool_no_repeat
  *          Boolean.  Should the message show more than once per page view?  Set to TRUE if it should NOT.  
  */

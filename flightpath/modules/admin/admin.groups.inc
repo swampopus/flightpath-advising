@@ -597,13 +597,25 @@ function admin_edit_group_form() {
   );
   
   
+  $draft_setting_current_catalog_year = variable_get_for_school("current_draft_catalog_year", 2006, $school_id);
+
+  if ($draft_setting_current_catalog_year < $de_catalog_year) {
+    
+    fp_add_message(t("<b>Warning:</b> The Draft catalog year is set to %dy, which is less than the catalog year
+                    you are editing. This might cause issues with loading course 
+                    names and data correctly.", array("%dy" => $draft_setting_current_catalog_year)), "warning");
+    $draft_setting_current_catalog_year = "<b>" . $draft_setting_current_catalog_year . "</b>"; 
+  }
+
+  
   if (user_has_permission("can_view_advanced")) {
     $form["mark" . $m++] = array(
       "type" => "markup",
-      "value" => " <span class='tenpt' style='background-color: yellow; margin-left: 20px;'>
+      "value" => " <span class='tenpt' style='background-color: lemonchiffon; margin-left: 20px; padding: 8px;'>
           adv: group_id = $group_id.
           Used by:
-          <a href='javascript: adminPopupWindow(\"" . fp_url("admin/groups/popup-show-group-use", "group_id=$group_id")  . "\");'>[degrees]</a>
+          <a href='javascript: adminPopupWindow(\"" . fp_url("admin/groups/popup-show-group-use", "group_id=$group_id")  . "\");'>[degrees]</a>.
+           Draft advising catalog year setting: $draft_setting_current_catalog_year.
           </span>",
       "weight" => 0,
     );
