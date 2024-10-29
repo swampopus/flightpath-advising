@@ -1710,10 +1710,15 @@ function admin_edit_degree_form_validate($form, &$form_state) {
   
   
   // At this point, we have a school_id and degree_id.
-  
+  $school_name = t('Default');
   if (module_enabled("schools")) {            
     $defs = schools_get_school_definitions();          
-    $school_name = $defs[$school_id];
+    if (isset($defs[$school_id])) {
+      $school_name = $defs[$school_id];
+    }
+    else {
+      $school_name = t('Not Found');
+    }
   }  
   
   $highest_semester_num = 0;

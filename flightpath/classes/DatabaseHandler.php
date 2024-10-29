@@ -1135,6 +1135,8 @@ $query_and_args
     // If we were not sent a valid course name, return FALSE right away.
     if (!$subject_id && !$course_num) return FALSE;
     
+    if (!$course_num) $course_num = ''; // Make sure it isn't FALSE or NULL
+    
     // Ignore the colon, if there is one.
     if (strpos($course_num, ":") !== FALSE)
     {

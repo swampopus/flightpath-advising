@@ -1,6 +1,9 @@
 FlightPath 7.x Changelog
 ========================
 
+2024-10-29
+  Fixing display of school name when an invalid school_id is supplied to schools module.
+  
 
 2024-10-25
   Added an extra warning when editing degrees or groups if the draft catalog year setting is LESS than the year you are editing, as that
