@@ -880,7 +880,8 @@ function admin_display_groups_popup_edit_definition() {
     $defs = schools_get_school_definitions();
     if (isset($defs[$school_id])) $school_name = $defs[$school_id];
   }    
-
+  
+  $definition = '';
   if (isset($_REQUEST["definition"])) {
     $definition = trim($_REQUEST["definition"]);
   }
@@ -974,7 +975,8 @@ function admin_get_course_array_from_course_id_array($course_idArray) {
 
 
 function admin_get_courses_from_definition($definition, $catalog_year = "", $school_id = 0) {
-   
+  
+  if (!$definition) $definition = ''; // Make sure it's a string and not FALSE or NULL. 
   
   $group_array = array();
 
@@ -1059,8 +1061,8 @@ function admin_get_courses_from_definition($definition, $catalog_year = "", $sch
     if ($line == "~~" || $line == "") continue;
     $count++;
     $temp = explode(" ~~ ", $line);
-    $si = trim($temp[0]);
-    $cn = trim($temp[1]);
+    $si = fp_trim(@$temp[0]);
+    $cn = fp_trim(@$temp[1]);
 
     @$rtn["text"] .= "$si $cn\n";
 

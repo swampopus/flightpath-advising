@@ -13,7 +13,7 @@ class Group extends stdClass
 	public $assigned_to_semester_num, $bool_placeholder, $data_entry_comment, $public_note;
 	public $list_courses, $list_groups, $db, $count_of_matches, $bool_winning_branch;
 	public $catalog_year, $school_id;
-	public $priority;
+	public $priority, $definition;
 	//////////////////
 	///  From the database...
 	public $db_unassign_group_id, $db_delete_flag, $db_catalog_repeat;
