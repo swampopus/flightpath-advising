@@ -105,6 +105,9 @@ class Group extends stdClass
 	function assign_min_grade($min_grade)
 	{
 		// Assign every course in the group to have this particular min grade.
+		
+		$min_grade = strtoupper($min_grade);
+		
 		$this->min_grade = $min_grade;
 
 		$this->list_courses->assign_min_grade($min_grade);

@@ -1,6 +1,10 @@
 FlightPath 7.x Changelog
 ========================
 
+2024-11-04
+  Made various tweaks so that every time we are working with a min_grade, it has always been converted to uppercase.
+  
+
 2024-10-29
   Fixing display of school name when an invalid school_id is supplied to schools module.
   

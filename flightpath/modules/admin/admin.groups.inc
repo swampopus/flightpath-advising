@@ -359,6 +359,8 @@ function admin_edit_group_form_submit(&$form, &$form_state) {
         $min_grade = str_replace("(","",$min_grade);
         $min_grade = str_replace(")","",$min_grade);
 
+        $min_grade = strtoupper($min_grade);
+
         $course_repeats = str_replace("[","",$course_repeats);
         $course_repeats = str_replace("]","",$course_repeats);
         $course_repeats = intval($course_repeats);

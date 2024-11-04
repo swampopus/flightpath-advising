@@ -1789,6 +1789,8 @@ function admin_edit_degree_form_validate($form, &$form_state) {
       $min_grade = str_replace("(","",$min_grade);
       $min_grade = str_replace(")","",$min_grade);
 
+      $min_grade = strtoupper($min_grade);
+
       /////////////////////////////////////////////
       // Find out what the course_id is.
       if ($course_id = $db->get_course_id($subject_id, $course_num, "", TRUE, $school_id, TRUE))  
@@ -1841,6 +1843,7 @@ function admin_edit_degree_form_validate($form, &$form_state) {
     $type = $temp[4];
     $min_grade = trim($temp[5]);
     
+    $min_grade = strtoupper($min_grade);
         
     $adding_group = new Group($group_id);
     
@@ -2333,7 +2336,7 @@ function admin_edit_degree_form_submit($form, $form_state) {
     $type = $temp[4];
     $min_grade = trim($temp[5]);
     
-    
+    $min_grade = strtoupper($min_grade);
     
     $adding_group = new Group($group_id);
     

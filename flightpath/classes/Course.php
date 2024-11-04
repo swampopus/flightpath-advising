@@ -1026,15 +1026,17 @@ class Course extends stdClass
     // Does $this course meet the min grade requirement
     // of the supplied course requirement?
 
+    $m_grade = strtoupper($m_grade);
+    
     // Get these grade definitions from our system settings
     // Configure them in custom/settings.php    
     $enrolled_grades = csv_to_array(variable_get_for_school("enrolled_grades", 'E', $this->school_id));
     $retake_grades = csv_to_array(variable_get_for_school("retake_grades",'', $this->school_id));
     $withdrew_grades = csv_to_array(variable_get_for_school("withdrew_grades", "W", $this->school_id));
     
-    
+    $min_grade = '';
     if ($course_req != null) {
-      $min_grade = $course_req->min_grade;
+      $min_grade = strtoupper($course_req->min_grade);
     } else {
       $min_grade = $m_grade;
     }

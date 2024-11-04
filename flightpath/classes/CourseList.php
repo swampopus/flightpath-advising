@@ -43,7 +43,7 @@ class CourseList extends ObjList
   {
     // Go through the list and give every course the specified
     // min grade.
-
+    $min_grade = strtoupper($min_grade);
     for ($t = 0; $t < $this->count; $t++)
     {
       $course = $this->array_list[$t];
@@ -327,6 +327,8 @@ class CourseList extends ObjList
     // We should, too, check for minimum grades here
     // as well.
 
+    $min_grade = strtoupper($min_grade);
+    
     if (!$list_matches =  parent::find_all_matches($course_c))
     {
       return false;
@@ -470,6 +472,7 @@ class CourseList extends ObjList
   function find_best_grade_match(Course $course_c, $min_grade = "", $bool_mark_repeats_exclude = false, $degree_id = 0, $bool_skip_already_assigned_to_degree = TRUE, $bool_skip_subs = FALSE, $group_id = 0)
   {
     
+    $min_grade = strtoupper($min_grade);
         
     $list_matches = parent::find_all_matches($course_c);
     if (!$list_matches) {
@@ -1710,6 +1713,8 @@ class CourseList extends ObjList
   function find_best_match(Course $course_c, $min_grade = "", $bool_mark_repeats_exclude = false, $degree_id = 0, $bool_skip_already_assigned_to_degree = TRUE, $bool_skip_subs = FALSE, $group_id = 0)
   {
     $rtn = FALSE;
+    
+    $min_grade = strtoupper($min_grade);
     
     $school_id = $course_c->school_id;    
     

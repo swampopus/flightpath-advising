@@ -766,7 +766,7 @@ class FlightPath extends stdClass
             $temp_ds = $course_requirement->to_data_string();
             $new_course = new Course();
             $new_course->load_course_from_data_string_for_requirement_clone($temp_ds);
-            $new_course->min_grade = $course_requirement->min_grade;
+            $new_course->min_grade = strtoupper($course_requirement->min_grade);
             if ($assign_to_semester_num !== -1) {
               $new_course->assigned_to_semester_num = $assign_to_semester_num;
             }
@@ -806,7 +806,7 @@ class FlightPath extends stdClass
             $new_course->set_bool_substitution_split($req_by_degree_id, TRUE);
             $new_course->set_bool_substitution_new_from_split($req_by_degree_id, TRUE);
             $new_course->requirement_type = $course_requirement->requirement_type;
-            $new_course->min_grade = $course_requirement->min_grade;  
+            $new_course->min_grade = strtoupper($course_requirement->min_grade);  
             $new_course->req_by_degree_id = $req_by_degree_id; 
             $new_course->assigned_to_degree_ids_array[$req_by_degree_id] = $req_by_degree_id; 
             $new_course->db_degree_requirement_id = floatval($course_requirement->db_degree_requirement_id . ".1");
@@ -1014,7 +1014,7 @@ class FlightPath extends stdClass
               $temp_ds = $course_requirement->to_data_string();
               $new_course = new Course();
               $new_course->load_course_from_data_string_for_requirement_clone($temp_ds);
-              $new_course->min_grade = $course_requirement->min_grade;
+              $new_course->min_grade = strtoupper($course_requirement->min_grade);
 
               if ($assign_to_semester_num !== -1) {                
                 $new_course->assigned_to_semester_num = $assign_to_semester_num;
