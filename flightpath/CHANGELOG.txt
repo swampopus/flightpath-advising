@@ -1,6 +1,11 @@
 FlightPath 7.x Changelog
 ========================
 
+
+2024-11-07
+  Minor tweaks to ensure course hours are numeric before attempting arithmatic with them.
+  
+  
 2024-11-04
   Made various tweaks so that every time we are working with a min_grade, it has always been converted to uppercase.
   

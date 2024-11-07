@@ -2143,12 +2143,15 @@ class FlightPath extends stdClass
             $h = $var_hours;
             if ($h == 0) {
               $h = $course->get_catalog_hours();
-              if ($h == 0) {
+              if (!$h || $h == 0 || !is_numeric($h)) {
                 $h = 1;  // some problem occured. Just give it a token hour so it doesn't
                          // horribly break.
               }
             }
-            $g->hours_assigned += $h;
+            
+            if (is_numeric($h)) {
+              $g->hours_assigned += $h;
+            }
             
           }
           
