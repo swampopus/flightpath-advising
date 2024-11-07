@@ -164,10 +164,10 @@ function prereqs_settings_form() {
     "type" => "textfield",
     "maxlength" => "255",
     "size" => "80",
-    "value" => variable_get("prereqs_lock_msg_courses", "This course is not listed as being available because the student has not fulfilled the following prerequisite course(s) and possible min grades:\\n   @need_courses."),
+    "value" => variable_get("prereqs_lock_msg_courses", "This course is not listed as being available because the student has not fulfilled the following prerequisite course(s) and possible min grades:\\n@need_courses"),
     "description" => t("This message will show to the advisor when they try to bypass the lock for prereq courses.  You may use the replacement pattern <b>@needed_courses</b>
                         to mean the current term selected.  You may also use \\n to mean 'insert new line.'  
-                        <br>Ex: <em>This course is not listed as being available because the student has not fulfilled the following prerequisite course(s) and possible min grades:\\n   @need_courses.</em>"),
+                        <br>Ex: <em>This course is not listed as being available because the student has not fulfilled the following prerequisite course(s) and possible min grades:\\n@need_courses</em>"),
   );
     
   
@@ -592,9 +592,9 @@ function prereqs_get_prereq_warnings_for_course(Course $course, Student $student
         // Fix trouble characters, and reformat so it looks pretty.
         $prereq_data = "  - " . str_replace("\n", "\\n  - ", $prereq_data);
                 
+        $prereq_data = trim($prereq_data);
         
-        
-        $warning_msg = variable_get("prereqs_lock_msg_courses", "This course is not listed as being available because the student has not fulfilled the following prerequisite course(s) and possible min grades:\\n@need_courses.\\nAre you sure you wish to advise the student to enroll in this course anyway?");
+        $warning_msg = variable_get("prereqs_lock_msg_courses", "This course is not listed as being available because the student has not fulfilled the following prerequisite course(s) and possible min grades:\\n@need_courses\\nAre you sure you wish to advise the student to enroll in this course anyway?");
         
         $rtn["prereq"]["plain_text"] = t($warning_msg, array("@need_courses" => $prereq_data));
         
@@ -620,6 +620,9 @@ function prereqs_get_prereq_warnings_for_course(Course $course, Student $student
             $html .= $details["subject_id"] . " " . $details["course_num"];
             if ($details["min_grade"] != "") {
               $html .= " (" . $details["min_grade"] . ") ";
+            }
+            if ($course_class == "prereqs-incomplete-course") {
+              $html .= " &nbsp; [" . t("not fulfilled") . "]";
             }
             $html .= "</span>";            
             
