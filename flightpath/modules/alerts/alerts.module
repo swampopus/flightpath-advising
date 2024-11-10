@@ -755,7 +755,7 @@ function alerts_content_register_content_type() {
  */
 function alerts_content_load(&$content) {
   
-  if ($content->type != 'alert') return;  // We only care about the 'alert' content type.
+  if (!$content || !is_object($content) || $content->type != 'alert') return;  // We only care about the 'alert' content type.
   
   // If there are any media files in this alert, search for and add them to the content object so they are displayed.  
   $cid = $content->cid;

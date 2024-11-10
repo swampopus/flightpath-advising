@@ -1,6 +1,10 @@
 FlightPath 7.x Changelog
 ========================
 
+2024-11-08
+  Small change in alerts module to make sure that $content is a valid object before
+  working on it.
+
 
 2024-11-07
   Minor tweaks to ensure course hours are numeric before attempting arithmatic with them.
