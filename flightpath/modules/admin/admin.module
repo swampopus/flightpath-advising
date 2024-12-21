@@ -1262,7 +1262,10 @@ function admin_menu_handle_replacement_pattern($str) {
   
   if (strpos($str, "%PAGE%") !== 0) {
     // It contains this replacement pattern!
-    $page = (string) @$_GET["page"];
+    $page = "";
+    if (isset($_GET['page']) && !is_array($_GET["page"]) && !is_object($_GET['page'])) {
+      $page = (string) $_GET["page"];
+    }
     $str = str_replace("%PAGE%", $page, $str);
   }
     
