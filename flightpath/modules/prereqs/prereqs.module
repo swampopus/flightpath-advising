@@ -417,8 +417,8 @@ function prereqs_get_prereq_array_from_string($prereqs_str, $school_id = 0) {
         
       $temp = explode(" ", $course_line);
     
-      $subject_id = trim($temp[0]);
-      $course_num = trim($temp[1]);
+      $subject_id = fp_trim(@$temp[0]);
+      $course_num = fp_trim(@$temp[1]);
       $min_grade = @trim(str_replace("(", "", $temp[2]));
       $min_grade = @trim(str_replace(")", "", $min_grade));
       
